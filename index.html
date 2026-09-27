@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive resume of Amirali Ghorbani — Python & .NET backend developer, machine learning and automation">
+  <meta name="theme-color" content="#04060f">
+  <title>Amirali Ghorbani | Backend & ML Developer</title>
+
+  <link rel="icon" type="image/png" href="assets/img/logo.png">
+  <meta property="og:title" content="Amirali Ghorbani | Backend & ML Developer">
+  <meta property="og:image" content="assets/img/photo_5868339638047982152_y.jpg">
+  <meta property="og:type" content="website">
+
+  <link rel="preload" href="fonts/Pinar-FD-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/Pinar-FD-Bold.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- set language/direction before first paint (default: english) -->
+  <script>
+    (function () {
+      var lang = 'en';
+      try { lang = localStorage.getItem('resume-lang') || 'en'; } catch (e) {}
+      if (lang !== 'fa' && lang !== 'en') lang = 'en';
+      var d = document.documentElement;
+      d.lang = lang;
+      d.dir = lang === 'fa' ? 'rtl' : 'ltr';
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- ═══════════ PRELOADER ═══════════ -->
+  <div id="preloader" aria-hidden="true">
+    <div class="boot-terminal">
+      <div class="boot-bar">
+        <span class="t-dot red"></span><span class="t-dot yellow"></span><span class="t-dot green"></span>
+        <span class="boot-title">amirali@core: ~</span>
+      </div>
+      <div class="boot-body">
+        <div class="boot-line" data-line="> boot amirali.sys v2.6 .............. [ OK ]"></div>
+        <div class="boot-line" data-line="> loading modules: python · dotnet · ml"></div>
+        <div class="boot-line" data-line="> mounting /dev/resume ............ [ OK ]"></div>
+        <div class="boot-line" data-line="> rendering 3d experience ......... [ OK ]"></div>
+        <div class="boot-line boot-final" data-line="> ACCESS GRANTED _"></div>
+        <div class="boot-progress"><span id="boot-bar-fill"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- custom cursor -->
+  <div id="cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- scroll progress -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- global particle network background -->
+  <canvas id="bg-particles" aria-hidden="true"></canvas>
+
+  <!-- ═══════════ NAV ═══════════ -->
+  <header id="nav">
+    <nav class="nav-inner container">
+      <a href="#home" class="nav-logo mono" aria-label="home">
+        <img class="nav-avatar" src="assets/img/logo.png" alt="">AG<span class="logo-cursor">://</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about" class="nav-link" data-i18n="nav.about">درباره</a></li>
+        <li><a href="#skills" class="nav-link" data-i18n="nav.skills">مهارت‌ها</a></li>
+        <li><a href="#experience" class="nav-link" data-i18n="nav.experience">تجربه‌ها</a></li>
+        <li><a href="#projects" class="nav-link" data-i18n="nav.projects">پروژه‌ها</a></li>
+        <li><a href="#education" class="nav-link" data-i18n="nav.education">تحصیلات</a></li>
+        <li><a href="#contact" class="nav-link" data-i18n="nav.contact">تماس</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="lang-toggle" class="lang-toggle" aria-label="switch language">
+          <span class="lang-thumb" aria-hidden="true"></span>
+          <span class="lang-opt" data-lang="fa">فا</span>
+          <span class="lang-opt" data-lang="en">EN</span>
+        </button>
+        <button id="nav-burger" class="nav-burger" aria-label="menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- mobile menu overlay -->
+  <div id="mobile-menu" aria-hidden="true">
+    <ul>
+      <li><a href="#about" data-i18n="nav.about">درباره</a></li>
+      <li><a href="#skills" data-i18n="nav.skills">مهارت‌ها</a></li>
+      <li><a href="#experience" data-i18n="nav.experience">تجربه‌ها</a></li>
+      <li><a href="#projects" data-i18n="nav.projects">پروژه‌ها</a></li>
+      <li><a href="#education" data-i18n="nav.education">تحصیلات</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">تماس</a></li>
+    </ul>
+  </div>
+
+  <main id="content">
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <section id="home" class="hero">
+      <div class="hero-floor" aria-hidden="true"></div>
+
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <div class="hero-chip mono"><span class="chip-dot"></span><span data-i18n="hero.greeting">سلام دنیا! من</span></div>
+
+          <h1 class="hero-title glitch" data-i18n="hero.name" data-glitch>امیرعلی قربانی</h1>
+
+          <div class="hero-typing mono" dir="ltr">
+            <span class="typing-prompt">$</span>
+            <span id="typed"></span><span class="caret" aria-hidden="true"></span>
+          </div>
+
+          <p class="hero-pitch" data-i18n="hero.pitch">
+            بک‌اند را با Python و .NET می‌سازم؛ از تحلیل داده و یادگیری ماشین تا خودکارسازی فرایندها.
+            ایده‌های نو را به محصول واقعی تبدیل می‌کنم.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary magnetic">
+              <span data-i18n="hero.ctaProjects">مشاهده پروژه‌ها</span>
+              <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="#contact" class="btn btn-ghost magnetic" data-i18n="hero.ctaContact">تماس با من</a>
+          </div>
+
+          <div class="hero-socials">
+            <a href="https://github.com/amili-code" target="_blank" rel="noopener" class="social-btn" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .3.2.66.8.55A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+            </a>
+            <a href="https://t.me/qmirqliii" target="_blank" rel="noopener" class="social-btn" aria-label="Telegram">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.91 3.79 20.3 20.84c-.25 1.21-.98 1.5-2 .94l-5.5-4.07-2.66 2.57c-.3.3-.55.56-1.1.56-.72 0-.6-.27-.84-.95L6.3 13.7l-5.45-1.7c-1.18-.35-1.19-1.16.26-1.75l21.26-8.2c.97-.43 1.9.26 1.53 1.73z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/amiralighorbani/" target="_blank" rel="noopener" class="social-btn" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+            </a>
+            <a href="mailto:a.ghorbani.info@gmail.com" class="social-btn" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-3d">
+          <div class="hero-3d-frame" aria-hidden="true"></div>
+          <canvas id="hero3d" aria-label="interactive 3d tech core"></canvas>
+          <div class="hero-photo" aria-hidden="true">
+            <img src="assets/img/photo_5868339638047982150_x.jpg" alt="">
+            <span class="hero-photo-scan"></span>
+          </div>
+          <div class="hero-3d-hint mono" data-i18n="hero.drag">بکش و بچرخان</div>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-down" aria-label="scroll down">
+        <div class="mouse"><div class="wheel"></div></div>
+        <span class="mono" data-i18n="hero.scroll">اسکرول کن</span>
+      </a>
+    </section>
+
+  <!-- ═══════════ TECH MARQUEE ═══════════ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item mono">PYTHON</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">FASTAPI</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">.NET</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">NODE.JS</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">REACT</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">DOCKER</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">POSTGRESQL</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">MONGODB</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">REDIS</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">N8N</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">MACHINE LEARNING</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">AUTOMATION</span><span class="marquee-sep">✦</span>
+    </div>
+  </div>
+
+    <!-- ═══════════ ABOUT ═══════════ -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-path mono" dir="ltr">$ whoami</div>
+          <h2 class="section-title" data-i18n="about.title">درباره من</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="terminal reveal" data-delay="1">
+            <div class="terminal-bar">
+              <span class="t-dot red"></span><span class="t-dot yellow"></span><span class="t-dot green"></span>
+              <span class="terminal-title mono" dir="ltr">amirali@core: ~/about</span>
+            </div>
+            <div class="terminal-body">
+              <div class="cmd-line mono" dir="ltr"><span class="prompt">$</span> cat about.txt</div>
+              <p data-i18n="about.text1">
+                دانشجوی مهندسی کامپیوتر دانشگاه صنعتی سجاد و توسعه‌دهنده بک‌اند با تمرکز بر Python و .NET.
+                از هنرستان سمپاد امیرکبیر جدی وارد دنیای برنامه‌نویسی شدم و از آن موقع از توسعه سرویس‌های بک‌اند
+                و سامانه‌های ERP تا تحلیل داده و خودکارسازی با n8n را تجربه کرده‌ام.
+              </p>
+              <p data-i18n="about.text2">
+                هدف من ساده است: تبدیل ایده‌های نو به محصول واقعی؛ سریع، مرحله‌ای و با کیفیت.
+              </p>
+              <div class="cmd-line mono" dir="ltr"><span class="prompt">$</span> echo $STATUS</div>
+              <div class="cmd-out mono" dir="ltr" data-i18n-html="about.status">« آماده همکاری و پروژه جدید »</div>
+            </div>
+          </div>
+
+          <div class="about-side">
+            <div class="photo-card reveal" data-delay="2">
+              <div class="photo-inner">
+                <div class="photo-face photo-front">
+                  <img src="assets/img/photo_5868339638047982152_y.jpg" alt="Amirali Ghorbani" data-i18n-alt="alt.profile">
+                  <span class="photo-scan" aria-hidden="true"></span>
+                </div>
+                <div class="photo-face photo-back">
+                  <img src="assets/img/photo_5868339638047982151_y.jpg" alt="">
+                </div>
+              </div>
+              <div class="photo-tag mono" dir="ltr">amirali@core:~$ whoami</div>
+              <div class="photo-flip-hint mono" data-i18n="about.flipHint">↻ hover to flip</div>
+            </div>
+
+            <div class="ai-card reveal tilt" data-delay="3">
+              <div class="ai-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>
+              </div>
+              <h3 data-i18n="about.aiTitle">هوش مصنوعی در جریان کار</h3>
+              <p data-i18n="about.aiText">
+                از ابزارهای هوش مصنوعی به‌عنوان بخشی از جریان کاری‌ام استفاده می‌کنم؛ از پیاده‌سازی و بازبینی کد
+                تا خودکارسازی کارهای تکراری — برای تحویل مرحله‌ای و سریع‌تر پروژه‌ها.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-item reveal" data-delay="1">
+            <span class="info-label mono" data-i18n="info.location">موقعیت</span>
+            <span class="info-value" data-i18n="info.locationVal">مشهد، ایران</span>
+          </div>
+          <div class="info-item reveal" data-delay="2">
+            <span class="info-label mono" data-i18n="info.age">سن</span>
+            <span class="info-value"><span data-i18n="info.ageVal">۲۰</span> <span data-i18n="info.years">سال</span></span>
+          </div>
+          <div class="info-item reveal" data-delay="3">
+            <span class="info-label mono" data-i18n="info.email">ایمیل</span>
+            <a class="info-value ltr" href="mailto:a.ghorbani.info@gmail.com">a.ghorbani.info@gmail.com</a>
+          </div>
+          <div class="info-item reveal" data-delay="4">
+            <span class="info-label mono" data-i18n="info.phone">تلفن</span>
+            <a class="info-value ltr" href="tel:+989397759440" dir="ltr">+98 939 775 9440</a>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat reveal" data-delay="1">
+            <span class="stat-num mono"><span class="counter" data-count="4">0</span>+</span>
+            <span class="stat-label" data-i18n="stats.years">سال کدنویسی</span>
+          </div>
+          <div class="stat reveal" data-delay="2">
+            <span class="stat-num mono"><span class="counter" data-count="10">0</span>+</span>
+            <span class="stat-label" data-i18n="stats.projects">پروژه واقعی</span>
+          </div>
+          <div class="stat reveal" data-delay="3">
+            <span class="stat-num mono"><span class="counter" data-count="4">0</span></span>
+            <span class="stat-label" data-i18n="stats.teams">تیم و شرکت</span>
+          </div>
+          <div class="stat reveal" data-delay="4">
+            <span class="stat-num mono"><span class="counter" data-count="15">0</span>+</span>
+            <span class="stat-label" data-i18n="stats.tech">تکنولوژی و ابزار</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ SKILLS ═══════════ -->
+    <section id="skills" class="section section-alt">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-path mono" dir="ltr">$ ls ~/skills</div>
+          <h2 class="section-title" data-i18n="skills.title">مهارت‌ها</h2>
+        </div>
+
+        <!-- 3D orbit carousel of technologies -->
+        <div class="oc-wrap reveal">
+          <div class="oc-stage" id="oc-stage">
+            <div class="oc-ring" id="oc-ring">
+              <div class="oc-panel" style="--a:0deg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 4h5a3 3 0 0 1 3 3v3H9a3 3 0 0 0-3 3v3"/><path d="M14 20H9a3 3 0 0 1-3-3v-1h9a3 3 0 0 0 3-3v-1"/><circle cx="9" cy="6.5" r=".9" fill="currentColor"/><circle cx="14.5" cy="17.5" r=".9" fill="currentColor"/></svg>
+                <span class="mono">Python</span>
+              </div>
+              <div class="oc-panel" style="--a:36deg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" stroke-linejoin="round"/></svg>
+                <span class="mono">FastAPI</span>
+              </div>
+              <div class="oc-panel" style="--a:72deg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M7 15l2.5-6L12 15M8 13h3M14 15v-6h2.5a1.8 1.8 0 0 1 0 3.6H14m2.5 0L18 15" stroke-linecap="round"/></svg>
+                <span class="mono">.NET</span>
+              </div>
+              <div class="oc-panel" style="--a:108deg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8.7 5v10L12 22l-8.7-5V7L12 2z" stroke-linejoin="round"/><path d="M12 22V12M12 12L3.3 7M12 12l8.7-5" opacity=".45"/></svg>
+                <span class="mono">Node.js</span>
+              </div>
+              <div class="oc-panel" style="--a:144deg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="1.7" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9.5" ry="3.7"/><ellipse cx="12" cy="12" rx="9.5" ry="3.7" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.5" ry="3.7" transform="rotate(120 12 12)"/></svg>
+                <span class="mono">React</span>
+              </div>
+              <div class="oc-panel" style="--a:180deg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12.5h3v3H4zM7.5 12.5h3v3h-3zM11 12.5h3v3h-3zM7.5 9h3v3h-3zM14 12.5h3v3h-3z"/><path d="M2.5 17.5h19M4 12.5C6 9 9 8 12 8s6 1 8 4.5" stroke-linecap="round"/></svg>
+                <span class="mono">Docker</span>
+              </div>
+              <div class="oc-panel" style="--a:216deg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v13c0 1.6 3.4 2.9 7.5 2.9s7.5-1.3 7.5-2.9v-13"/><path d="M4.5 12c0 1.6 3.4 2.9 7.5 2.9s7.5-1.3 7.5-2.9"/></svg>
+                <span class="mono">PostgreSQL</span>
+              </div>
+              <div class="oc-panel" style="--a:252deg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2c3 3.5 5.5 6.8 5.5 11a5.5 5.5 0 0 1-11 0C6.5 8.8 9 5.5 12 2z" stroke-linejoin="round"/><path d="M12 9v11"/></svg>
+                <span class="mono">MongoDB</span>
+              </div>
+              <div class="oc-panel" style="--a:288deg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3.5 8.5 12 5l8.5 3.5L12 12 3.5 8.5z" stroke-linejoin="round"/><path d="M3.5 12.5 12 16l8.5-3.5M3.5 16.5 12 20l8.5-3.5"/></svg>
+                <span class="mono">Redis</span>
+              </div>
+              <div class="oc-panel" style="--a:324deg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="5" cy="12" r="2.2"/><circle cx="19" cy="5.5" r="2.2"/><circle cx="19" cy="18.5" r="2.2"/><path d="M7.2 11.2 16.8 6.3M7.2 12.8l9.6 4.9"/></svg>
+                <span class="mono">n8n</span>
+              </div>
+            </div>
+          </div>
+          <div class="oc-hint mono" data-i18n="carousel.hint">↻ drag to spin</div>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-card tilt reveal" data-delay="1">
+            <div class="skill-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/><circle cx="6" cy="6.5" r=".8" fill="currentColor"/><circle cx="6" cy="17.5" r=".8" fill="currentColor"/></svg>
+            </div>
+            <h3 data-i18n="skills.backend">بک‌اند</h3>
+            <div class="skill-tags">
+              <span class="tag mono">Python</span><span class="tag mono">FastAPI</span><span class="tag mono">.NET</span>
+              <span class="tag mono">PHP</span><span class="tag mono">Node.js</span><span class="tag mono">Express</span>
+              <span class="tag mono">Socket.IO</span>
+            </div>
+          </div>
+
+          <div class="skill-card tilt reveal" data-delay="2">
+            <div class="skill-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2.2"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg>
+            </div>
+            <h3 data-i18n="skills.data">داده و یادگیری ماشین</h3>
+            <div class="skill-tags">
+              <span class="tag mono">Pandas</span><span class="tag mono">scikit-learn</span><span class="tag mono">ML</span>
+              <span class="tag mono">PostgreSQL</span><span class="tag mono">MySQL</span><span class="tag mono">MongoDB</span>
+            </div>
+          </div>
+
+          <div class="skill-card tilt reveal" data-delay="3">
+            <div class="skill-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="13" height="16" rx="2"/><path d="M15 9h5.5L22 12v6a2 2 0 0 1-2 2h-5zM8 20v2M13 20v2"/></svg>
+            </div>
+            <h3 data-i18n="skills.frontend">فرانت‌اند</h3>
+            <div class="skill-tags">
+              <span class="tag mono">React</span><span class="tag mono">JavaScript</span>
+              <span class="tag mono">HTML</span><span class="tag mono">CSS</span>
+            </div>
+          </div>
+
+          <div class="skill-card tilt reveal" data-delay="4">
+            <div class="skill-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.7 6.3a5 5 0 0 0-7 7L3 18l3 3 4.7-4.7a5 5 0 0 0 7-7l-3.2 3.2-2.3-2.3L14.7 6.3z"/></svg>
+            </div>
+            <h3 data-i18n="skills.tools">ابزار و دواپس</h3>
+            <div class="skill-tags">
+              <span class="tag mono">Docker</span><span class="tag mono">Redis</span><span class="tag mono">Git</span>
+              <span class="tag mono">REST API</span><span class="tag mono">n8n</span><span class="tag mono">WordPress</span>
+              <span class="tag mono">Automation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ EXPERIENCE ═══════════ -->
+    <section id="experience" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-path mono" dir="ltr">$ git log --experience</div>
+          <h2 class="section-title" data-i18n="exp.title">تجربه‌ها</h2>
+        </div>
+
+        <div class="timeline">
+          <div class="tl-item reveal">
+            <div class="tl-card">
+              <div class="tl-top">
+                <h3 data-i18n="exp.1.role">برنامه‌نویس بک‌اند و یادگیری ماشین</h3>
+                <span class="tl-period mono" data-i18n="exp.1.period">مهر ۱۴۰۴ — اکنون</span>
+              </div>
+              <div class="tl-company mono" data-i18n="exp.1.company">دایرکت · زیرمجموعه هلدینگ اثر فرا ارتباط · مشهد</div>
+              <p data-i18n="exp.1.desc">
+                نزدیک به یک سال است که در تیم دایرکت روی چند پروژه محصولی و داخلی کار می‌کنم؛
+                از توسعه سرویس‌های بک‌اند تا تحلیل داده و خودکارسازی فرایندها.
+              </p>
+              <div class="tl-tags"><span class="tag mono">Python</span><span class="tag mono">.NET</span><span class="tag mono">Data</span><span class="tag mono">Automation</span></div>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-card">
+              <div class="tl-top">
+                <h3 data-i18n="exp.2.role">توسعه‌دهنده وردپرس (دورکاری)</h3>
+                <span class="tl-period mono" data-i18n="exp.2.period">حدود ۶ ماه · همکاری ریموت</span>
+              </div>
+              <div class="tl-company mono" data-i18n="exp.2.company">ورای ارتباط · دورکاری</div>
+              <p data-i18n="exp.2.desc">
+                روی پروژه‌های وردپرسی از پیاده‌سازی و شخصی‌سازی قالب تا رفع اشکال و بهینه‌سازی کار کردم.
+                دو افزونه اختصاصی هم توسعه دادم: تکثیر پست و برگه، و Lazy Load برای بهبود سرعت صفحات.
+              </p>
+              <div class="tl-tags"><span class="tag mono">WordPress</span><span class="tag mono">PHP</span><span class="tag mono">Plugin Dev</span></div>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-card">
+              <div class="tl-top">
+                <h3 data-i18n="exp.3.role">برنامه‌نویس</h3>
+                <span class="tl-period mono" data-i18n="exp.3.period">خرداد ۱۴۰۳ — آبان ۱۴۰۳</span>
+              </div>
+              <div class="tl-company mono" data-i18n="exp.3.company">مبنا رایانه کیان · مشهد</div>
+              <p data-i18n="exp.3.desc">
+                با دوره کارآموزی شروع کردم و سپس به صورت نیمه‌وقت و فریلنسری روی پروژه‌های مجموعه ادامه دادم؛
+                شامل سامانه Digital Signage با ارتباط Real-time.
+              </p>
+              <div class="tl-tags"><span class="tag mono">Digital Signage</span><span class="tag mono">Real-time</span></div>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-card">
+              <div class="tl-top">
+                <h3 data-i18n="exp.4.role">تولید محتوا</h3>
+                <span class="tl-period mono" data-i18n="exp.4.period">آبان ۱۴۰۳ — آذر ۱۴۰۳</span>
+              </div>
+              <div class="tl-company mono" data-i18n="exp.4.company">گروه تین تک · مشهد</div>
+              <p data-i18n="exp.4.desc">
+                در یک تیم کوچک با کمک هوش مصنوعی، فرایند تولید محتوا را از صفر تا خروجی نهایی
+                سریع‌تر و منظم‌تر کردیم.
+              </p>
+              <div class="tl-tags"><span class="tag mono">AI</span><span class="tag mono">Content Ops</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ PROJECTS ═══════════ -->
+    <section id="projects" class="section section-alt">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-path mono" dir="ltr">$ ls ~/projects</div>
+          <h2 class="section-title" data-i18n="proj.title">پروژه‌ها</h2>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card tilt reveal" data-delay="1">
+            <div class="project-top">
+              <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+              <div class="project-lines mono" aria-hidden="true"><span></span><span></span><span></span></div>
+            </div>
+            <h3 class="mono" dir="ltr">Selectify</h3>
+            <div class="project-sub" data-i18n="proj.1.sub">داده‌کاوی و تحلیل داده</div>
+            <p data-i18n="proj.1.desc">سامانه تحلیل دیتابیس میلیونی؛ بک‌اند با Python و FastAPI پیاده‌سازی شد.</p>
+            <div class="tl-tags"><span class="tag mono">Python</span><span class="tag mono">FastAPI</span><span class="tag mono">Data Mining</span></div>
+          </article>
+
+          <article class="project-card tilt reveal" data-delay="2">
+            <div class="project-top">
+              <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+              <div class="project-lines mono" aria-hidden="true"><span></span><span></span><span></span></div>
+            </div>
+            <h3 class="mono" dir="ltr">ERP System</h3>
+            <div class="project-sub" data-i18n="proj.2.sub">اتوماسیون فرایندهای سازمانی</div>
+            <p data-i18n="proj.2.desc">سامانه ERP با .NET برای یکپارچه‌سازی و خودکارسازی فرایندها؛ نسخه اولیه در حدود دو هفته تحویل شد.</p>
+            <div class="tl-tags"><span class="tag mono">.NET</span><span class="tag mono">ERP</span><span class="tag mono">Automation</span></div>
+          </article>
+
+          <article class="project-card tilt reveal" data-delay="3">
+            <div class="project-top">
+              <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+              <div class="project-lines mono" aria-hidden="true"><span></span><span></span><span></span></div>
+            </div>
+            <h3 class="mono" dir="ltr">WordPress Sites</h3>
+            <div class="project-sub" data-i18n="proj.3.sub">طراحی و پیاده‌سازی وب‌سایت</div>
+            <p data-i18n="proj.3.desc">راه‌اندازی mahancctv.com و pneutoos.com با شخصی‌سازی قالب و بهینه‌سازی عملکرد.</p>
+            <div class="tl-tags"><span class="tag mono">WordPress</span><span class="tag mono">PHP</span><span class="tag mono">Performance</span></div>
+          </article>
+
+          <article class="project-card tilt reveal" data-delay="1">
+            <div class="project-top">
+              <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+              <div class="project-lines mono" aria-hidden="true"><span></span><span></span><span></span></div>
+            </div>
+            <h3 class="mono" dir="ltr">WP Plugins</h3>
+            <div class="project-sub" data-i18n="proj.4.sub">افزونه‌های اختصاصی وردپرس</div>
+            <p data-i18n="proj.4.desc">دو افزونه با PHP: تکثیر پست و برگه برای تیم محتوا + Lazy Load برای بارگذاری تنبل تصاویر.</p>
+            <div class="tl-tags"><span class="tag mono">PHP</span><span class="tag mono">Plugin Dev</span><span class="tag mono">Lazy Load</span></div>
+          </article>
+
+          <article class="project-card tilt reveal" data-delay="2">
+            <div class="project-top">
+              <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+              <div class="project-lines mono" aria-hidden="true"><span></span><span></span><span></span></div>
+            </div>
+            <h3 class="mono" dir="ltr">Call Center AI</h3>
+            <div class="project-sub" data-i18n="proj.5.sub">ارزیابی خودکار تماس‌ها</div>
+            <p data-i18n="proj.5.desc">جریان ارزیابی تماس‌ها با n8n و هوش مصنوعی برای بررسی سریع‌تر و منظم‌تر کیفیت مکالمه‌ها.</p>
+            <div class="tl-tags"><span class="tag mono">n8n</span><span class="tag mono">AI</span><span class="tag mono">Automation</span></div>
+          </article>
+
+          <article class="project-card tilt reveal" data-delay="3">
+            <div class="project-top">
+              <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+              <div class="project-lines mono" aria-hidden="true"><span></span><span></span><span></span></div>
+            </div>
+            <h3 class="mono" dir="ltr">Digital Signage</h3>
+            <div class="project-sub" data-i18n="proj.6.sub">مدیریت محتوای نمایشگرها</div>
+            <p data-i18n="proj.6.desc">سامانه مدیریت نمایشگرها با ارتباط Real-time و استریم ویدئو — برج آرمیتاژ و هتل قدس.</p>
+            <div class="tl-tags"><span class="tag mono">Real-time</span><span class="tag mono">Streaming</span><span class="tag mono">IPTV</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ EDUCATION ═══════════ -->
+    <section id="education" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-path mono" dir="ltr">$ cat education.log</div>
+          <h2 class="section-title" data-i18n="edu.title">تحصیلات</h2>
+        </div>
+
+        <div class="edu-grid">
+          <div class="edu-card tilt reveal" data-delay="1">
+            <div class="edu-badge" data-i18n="edu.1.status">در حال تحصیل</div>
+            <h3 data-i18n="edu.1.school">دانشگاه صنعتی سجاد · مشهد</h3>
+            <div class="edu-degree mono" data-i18n="edu.1.degree">مهندسی کامپیوتر · کارشناسی</div>
+            <p data-i18n="edu.1.desc">چیزهایی که یاد می‌گیرم را هم‌زمان در پروژه‌های واقعی به کار می‌گیرم.</p>
+          </div>
+          <div class="edu-card tilt reveal" data-delay="2">
+            <div class="edu-badge badge-2" data-i18n="edu.2.status">فارغ‌التحصیل</div>
+            <h3 data-i18n="edu.2.school">هنرستان سمپاد امیرکبیر · مشهد</h3>
+            <div class="edu-degree mono" data-i18n="edu.2.degree">شبکه و نرم‌افزار رایانه</div>
+            <p data-i18n="edu.2.desc">از همین‌جا جدی‌تر وارد دنیای برنامه‌نویسی شدم و پایه مهارت‌های فنی‌ام را ساختم.</p>
+          </div>
+        </div>
+
+        <div class="edu-extra" aria-hidden="true">
+          <div class="cube-scene reveal" data-delay="3">
+            <div class="cube">
+              <div class="cube-face f1 mono">&lt;/&gt;</div>
+              <div class="cube-face f2 mono">Py</div>
+              <div class="cube-face f3 mono">.NET</div>
+              <div class="cube-face f4 mono">ML</div>
+              <div class="cube-face f5 mono">JS</div>
+              <div class="cube-face f6 mono">n8n</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ CONTACT ═══════════ -->
+    <section id="contact" class="section section-alt contact-section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-path mono" dir="ltr">$ ping amirali --reply</div>
+          <h2 class="section-title" data-i18n="contact.title">تماس</h2>
+        </div>
+
+        <p class="contact-lead reveal" data-i18n="contact.lead">
+          برای پروژه، همکاری یا حتی یک گفت‌وگوی فنی — یک پیام کافی است.
+        </p>
+
+        <div class="contact-grid">
+          <a href="mailto:a.ghorbani.info@gmail.com" class="contact-card tilt reveal" data-delay="1">
+            <div class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+            </div>
+            <span class="contact-label mono" data-i18n="contact.email">ایمیل</span>
+            <span class="contact-value mono" dir="ltr">a.ghorbani.info@gmail.com</span>
+          </a>
+
+          <a href="https://t.me/qmirqliii" target="_blank" rel="noopener" class="contact-card tilt reveal" data-delay="2">
+            <div class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.91 3.79 20.3 20.84c-.25 1.21-.98 1.5-2 .94l-5.5-4.07-2.66 2.57c-.3.3-.55.56-1.1.56-.72 0-.6-.27-.84-.95L6.3 13.7l-5.45-1.7c-1.18-.35-1.19-1.16.26-1.75l21.26-8.2c.97-.43 1.9.26 1.53 1.73z"/></svg>
+            </div>
+            <span class="contact-label mono" data-i18n="contact.telegram">تلگرام</span>
+            <span class="contact-value mono" dir="ltr">@qmirqliii</span>
+          </a>
+
+          <a href="tel:+989397759440" class="contact-card tilt reveal" data-delay="3">
+            <div class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 3h4l2 5-3 2a13 13 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>
+            </div>
+            <span class="contact-label mono" data-i18n="contact.phone">تلفن</span>
+            <span class="contact-value mono" dir="ltr">+98 939 775 9440</span>
+          </a>
+
+          <a href="https://amili-code.github.io" target="_blank" rel="noopener" class="contact-card tilt reveal" data-delay="4">
+            <div class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+            </div>
+            <span class="contact-label mono" data-i18n="contact.web">وب‌سایت</span>
+            <span class="contact-value mono" dir="ltr">amili-code.github.io</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════ TECH MARQUEE (reversed) ═══════════ -->
+  <div class="marquee marquee-rev" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item mono">BACKEND</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">MACHINE LEARNING</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">AUTOMATION</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">DATA MINING</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">ERP</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">REAL-TIME</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">REST API</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">WORDPRESS</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">SCIKIT-LEARN</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">PANDAS</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">DOCKER</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item mono">GIT</span><span class="marquee-sep">✦</span>
+    </div>
+  </div>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="footer">
+    <canvas id="matrix-rain" aria-hidden="true"></canvas>
+    <div class="container footer-inner">
+      <div class="footer-logo mono" dir="ltr">AG:// <span class="footer-blink">_</span></div>
+      <p data-i18n="footer.rights">© ۲۰۲۶ امیرعلی قربانی — ساخته‌شده با HTML / CSS / JS خالص</p>
+      <div class="footer-links">
+        <a href="https://github.com/amili-code" target="_blank" rel="noopener">GitHub</a>
+        <span class="dot-sep"></span>
+        <a href="https://t.me/qmirqliii" target="_blank" rel="noopener">Telegram</a>
+        <span class="dot-sep"></span>
+        <a href="https://www.linkedin.com/in/amiralighorbani/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-top" aria-label="back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script src="js/translations.js"></script>
+  <script src="js/engine3d.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
